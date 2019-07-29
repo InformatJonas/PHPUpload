@@ -1,28 +1,18 @@
-<style>
-    input[type="file"]{
-        opacity: 0;
-        z-index: -1;
-        position: absolute;
-        top: -1px;
-        left: 0;
-        width: 0.1px;
-        height: 0.1px;
-        color: red;
-    }
+<?php require($_SERVER['DOCUMENT_ROOT'] . '/upload.class.php'); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Upload File | Index</title>
+    <?php uploadFiles::beforeUpload(); ?>
+</head>
+<body>
+    
+</body>
+</html>
 
-    input[type="file"]:focus + label[for="files"]{
-        outline: 2px solid red;
-    }
-
-    strong{
-        margin-bottom: 20px;
-        display: block;
-    }
-</style>
-
-<?php if($_GET['x'] == 'maxFilesDetection'){ ?>
-    <strong>Du hast die Maximal Anzahl Überschriten</strong>
-<?php } ?>
 
 
 <form enctype="multipart/form-data" action="upload.php" method="POST">
