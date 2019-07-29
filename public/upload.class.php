@@ -17,20 +17,22 @@ class uploadFiles{
 
     function __construct(array $file,string $dir,array $allowedFormats,string $inputFieldName,int $maxFiles,int $maxSizes){
 
-        ini_set('max_file_uploads', $maxFiles);
-        ini_set('post_max_size',$maxFiles * $maxSizes . 'M');
-        ini_set('max_file_uploads',$maxSizes.'M');
+        session_start();
+
 
         $this->files = $this->convertArray($file,$inputFieldName);    
         $this->uploadDir = $_SERVER['DOCUMENT_ROOT'].'/../'.$dir;
         $this->formats = $allowedFormats;
 
         $this->maxFilesDetection($maxFiles);
+        /* $this->fileSizeDetection($maxSizes); */
+        $this->fileTypeDetection();
     }
 
     private function maxFilesDetection($maxFiles){
         if(count($this->files) >= $maxFiles){
-            header('Location:' . $_SERVER['HTTP_REFERER'] . '?x=maxFilesDetection');
+            $_SESSION['uploadElm'] = 'MaxFiles';
+            header('Location:' . $_SERVER['HTTP_REFERER']);
         }
     }
 
@@ -38,13 +40,25 @@ class uploadFiles{
         /**
          * Detect File Type
          */
+
+        foreach($this->files as $file){
+            if(!in_array(mime_content_type($file['file']),$this->formats)){
+            
+                $_SESSION['uploadElm'] = 'wrongFormat';
+                header('Location:' . $_SERVER['HTTP_REFERER']);
+            }
+        }
     }
 
-    private function fileSizeDetection(){
-        /**
-         * File Size Detection
-         */
-        var_dump($this->files);
+    private function fileSizeDetection($maxSizes){
+
+        foreach($this->files as $file){
+            if(($maxSizes * 1048576) > $file['size']){
+                $_SESSION['uploadElm'] = 'SizeToBig';
+                header('Location:' . $_SERVER['HTTP_REFERER']);
+            }
+        }
+ 
     }
 
     public function getFiles(){
@@ -113,10 +127,39 @@ class uploadFiles{
 
     }
 
-    public static function beforeUpload(){
+    public static function beforeUpload($items){
         session_start();
         /* JS & CSS File for Styling */
+
+        echo '<script>';
+
+            echo 'var ts = [];';
+            echo 'ts["file"] ="' . $items[0].'";';
+            echo 'ts["files"] ="' . $items[1].'";';
+
+        echo '</script>';
+
         echo '<script src="upload.class.js"></script>';
         echo '<link rel="stylesheet" href="upload.class.css">';
+    }
+
+    public static function resultManager(){
+        if(isset($_SESSION['uploadElm'])){
+            if($_SESSION['uploadElm'] ==  'MaxFiles'){
+                echo '<span class="err">Die Maximale Datei Anzahl wurde überschritten</span>';
+            }
+
+            if($_SESSION['uploadElm'] ==  'wrongFormat'){
+                echo '<span class="err">Du hast eine Datei in einem nicht Untertützend Format Hochgeladen</span>';
+            }
+
+            if($_SESSION['uploadElm'] ==  'SizeToBig'){
+                echo '<span class="err">Die Datei ist zu Groß zum Hochladen</span>';
+            }
+
+
+            $_SESSION['uploadElm'] = '';
+        }
+
     }
 }

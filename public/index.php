@@ -6,20 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Upload File | Index</title>
-    <?php uploadFiles::beforeUpload(); ?>
+
+    <?php uploadFiles::beforeUpload(['Datei Ausgewählt','Datein Ausgewählt']); ?>
 </head>
 <body>
-    
+
+ 
+
+    <form enctype="multipart/form-data" action="upload.php" method="POST">
+
+    <input type="file" multiple name="Datein[]" id="files"> 
+    <label for="files">Datei/n Hochladen</label>
+
+
+
+    <button>Senden</button>
+
+    </form>
+
+    <?php uploadFiles::resultManager(); ?>
+
 </body>
 </html>
-
-
-
-<form enctype="multipart/form-data" action="upload.php" method="POST">
-
-<input type="file" multiple name="Datein[]" id="files"> 
-<label for="files">File Upload</label>
-
-<button>Senden</button>
-
-</form>
