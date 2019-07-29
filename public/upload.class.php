@@ -8,6 +8,12 @@ class uploadFiles{
         ini_set('max_file_uploads',$maxSizes.'M');
 
         $this->files = $this->convertArray($file,$inputFieldName);
+
+        if(count($this->files) >= $maxFiles){
+            header('Location:' . $_SERVER['HTTP_REFERER'] . '?x=maxFilesDetection');
+        }
+     
+
         $this->uploadDir = $_SERVER['DOCUMENT_ROOT'].'/../'.$dir;
         $this->formats = $allowedFormats;
     }
