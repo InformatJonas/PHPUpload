@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Upload File | Index</title>
 
-    <?php uploadFiles::beforeUpload(['Datei Ausgewählt','Datein Ausgewählt']); ?>
+    <?php UploadFiles::beforeUpload(['Datei Ausgewählt','Datein Ausgewählt']); ?>
 </head>
 <body>
 
@@ -24,7 +24,7 @@
 
     </form>
 
-    <?php uploadFiles::resultManager(); ?>
+    <?php UploadFiles::resultManager(); ?>
 
 </body>
 </html>

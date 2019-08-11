@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 ini_set('max_file_uploads', 25);
 
 
-$handler = new uploadFiles($_FILES,'upload',['image/jpeg',"text/x-php"],'Datein',10,5);
+$handler = new UploadFiles($_FILES,'upload',['image/jpeg',"text/x-php"],'Datein',10,5);
 
 if($handler->saveFiles()){
     header('Location:' . $_SERVER['HTTP_REFERER']);
