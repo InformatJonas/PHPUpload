@@ -13,7 +13,7 @@
  */
 
 
-class uploadFiles{
+class UploadFiles{
 
     function __construct(array $file,string $dir,array $allowedFormats,string $inputFieldName,int $maxFiles,int $maxSizes){
 
