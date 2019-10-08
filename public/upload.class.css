@@ -1,9 +1,8 @@
-body{
+body {
     margin: 20px;
 }
 
-
-input[type="file"]{
+input[type="file"] {
     opacity: 0;
     z-index: -1;
     position: absolute;
@@ -14,11 +13,11 @@ input[type="file"]{
     color: red;
 }
 
-input[type="file"]:focus + label[for="files"]{
+input[type="file"]:focus + label[for="files"] {
     border: 1px solid #85E5FF;
 }
 
-label[for="files"]{
+label[for="files"] {
     background: #FF7B47;
     padding: 10px;
     color: #fff;
@@ -28,17 +27,17 @@ label[for="files"]{
     font-size: 16px;
 }
 
-label[for="files"]:hover{
+label[for="files"]:hover {
     background: #FF9E59;
 }
 
 
-strong{
+strong {
     margin-bottom: 20px;
     display: block;
 }
 
-button{
+button {
     margin-top: 100px;
     display: block;
     border: none;
@@ -50,12 +49,12 @@ button{
     border-radius: 4px;
 }
 
-button:hover{
+button:hover {
     background: rgb(64, 87, 94);
     cursor: pointer;
 }
 
-span.err{
+span.err {
     padding: 20px;
     color: #fff;
     background: rgb(117, 34, 41);
